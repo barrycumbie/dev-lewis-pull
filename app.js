@@ -13,7 +13,7 @@ app.use(express.static('./public/'))
 
 console.log(uri);
 
-console.log('im on a node server change that and that tanad f, yo');
+console.log('Im on a node server');
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -47,7 +47,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/ejs', (req,res)=>{
-``
+
   res.render('index', {
     myServerVariable : "something from server"
   });
@@ -63,8 +63,7 @@ app.get('/read', async (req,res)=>{
   console.log('connected?');
   // Send a ping to confirm a successful connection
   
-  let result = await client.db("Jacob-db").collection("whatever-collection")
-    .find({}).toArray(); 
+  let result = await client.db("jacob-db").collection("whatever-collection").find({}).toArray(); 
   console.log(result); 
 
   res.render('mongo', {
@@ -78,10 +77,8 @@ app.get('/insert', async (req,res)=> {
   console.log('in /insert');
   //connect to db,
   await client.connect();
-  //point to the collection 
-  await client.db("Jacob-db").collection("whatever-collection").insertOne({ post: 'hardcoded post insert '});
-  await client.db("Jacob-db").collection("whatever-collection").insertOne({ iJustMadeThisUp: 'hardcoded new key '});  
-  //insert into it
+  await client.db("jacob-db").collection("whatever-collection").insertOne({ post: 'hardcoded post insert '});
+  await client.db("jacob-db").collection("whatever-collection").insertOne({ key: 'hardcoded new key '});  
   res.render('insert');
 
 }); 
@@ -91,7 +88,7 @@ app.post('/update/:id', async (req,res)=>{
   console.log("req.parms.id: ", req.params.id)
 
   client.connect; 
-  const collection = client.db("Jacob-db").collection("whatever-collection");
+  const collection = client.db("jacob-db").collection("whatever-collection");
   let result = await collection.findOneAndUpdate( 
   {"_id": new ObjectId(req.params.id)}, { $set: {"post": "NEW POST" } }
 )
@@ -106,7 +103,7 @@ app.post('/delete/:id', async (req,res)=>{
   console.log("req.parms.id: ", req.params.id)
 
   client.connect; 
-  const collection = client.db("Jacob-db").collection("whatever-collection");
+  const collection = client.db("jacob-db").collection("whatever-collection");
   let result = await collection.findOneAndDelete( 
   {"_id": new ObjectId(req.params.id)})
 
