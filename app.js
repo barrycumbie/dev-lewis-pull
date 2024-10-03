@@ -6,6 +6,7 @@ const { urlencoded } = require('body-parser')
 const { ObjectId } = require('mongodb')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.URI;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
@@ -29,11 +30,11 @@ const client = new MongoClient(uri, {
 
 app.get('/', function (req, res) {
   // res.send('Hello Node from Ex on local dev box')
-  res.sendFile('index.html');
+  res.render('not-index');
 })
 
 app.get('/ejs', (req,res)=>{
-``
+
   res.render('index', {
     myServerVariable : "something from server"
   });
@@ -49,12 +50,11 @@ app.get('/read', async (req,res)=>{
   console.log('connected?');
   // Send a ping to confirm a successful connection
   
-  let result = await client.db("jacob-db").collection("whatever-collection")
-    .find({}).toArray(); 
+  let result = await client.db("jacob-db").collection("whatever-collection").find({}).toArray(); 
   console.log(result); 
 
-  res.render('read', {
-    postData : result
+  res.render('not-index', {
+    pData : result
   });
 
 })
@@ -109,4 +109,7 @@ app.post('/delete/:id', async (req,res)=>{
 
 })
 
-app.listen(5000);
+// app.listen(5000);
+app.listen(PORT, () => {
+  console.log(`Server is running & listening on port ${PORT}`);
+});
