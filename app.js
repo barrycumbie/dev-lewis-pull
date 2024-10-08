@@ -28,10 +28,10 @@ const client = new MongoClient(uri, {
 // function whateverNameOfIt (params) {}
 // ()=>{}
 
-app.get('/', function (req, res) {
-  // res.send('Hello Node from Ex on local dev box')
-  res.render('not-index');
-})
+// app.get('/', function (req, res) {
+//   // res.send('Hello Node from Ex on local dev box')
+//   res.render('not-index');
+// })
 
 app.get('/ejs', (req,res)=>{
 
@@ -42,7 +42,7 @@ app.get('/ejs', (req,res)=>{
   //can you get content from client...to console? 
 })
 
-app.get('/read', async (req,res)=>{
+app.get('/', async (req,res)=>{
 
   console.log('in /read');
   await client.connect();

@@ -32,8 +32,12 @@
       <div class='col-sm'>
         <!--   second column   -->
         <form>
+          <form method="POST" action="/update">
           <label for='fname'>First Name:</label>
-          <input type="text" id="fname" name="fname">
+          <input hidden id = "66feda5e44d5698e4463c8df">
+          <input type="text" id= 'fname' name='fname'>
+          <button id="fnameBtn" type="button" class="btn btn-info">Update</button>
+          </form>
           <br>
           <br>
           <label for='lname'>Last Name:</label>
@@ -232,6 +236,7 @@
       <!--     third column     -->
       <div class='col-sm'>
         <p>Which Procedure are you making an appointment for?<br>
+          
           <input type="checkbox" id="cbox1" name="cbox1" value="examinatiom">
           <label for="cbox1">Medical Examination</label><br>
           <input type="checkbox" id="cbox2" name="cbox2" value="surgery">
@@ -260,6 +265,7 @@
           <br>
           <button id="loadBtn" type="button" class="btn btn-warning">Load Data</button>
           <br>
+          <!-- button to update... -->
           <br>
           <p id='pg1'>
         </div>
