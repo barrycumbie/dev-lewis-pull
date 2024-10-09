@@ -44,7 +44,7 @@ app.get('/ejs', (req,res)=>{
 
 app.get('/', async (req,res)=>{
 
-  console.log('in /read');
+  console.log('in /');
   await client.connect();
   
   console.log('connected?');
@@ -64,30 +64,31 @@ app.post('/insert', async (req,res)=> {
   console.log('in /insert');
   
   console.log('request', req.body);
-  console.log('request', req.body.newPost);
 
   //connect to db,
   await client.connect();
   //point to the collection 
-  await client.db("jacob-db").collection("whatever-collection").insertOne({ post: req.body.newPost});
+  await client.db("jacob-db").collection("whatever-collection").insertOne({ lname: req.body.lname, email: req.body.email});
   // await client.db("jacob-db").collection("whatever-collection").insertOne({ key: 'hardcoded new key '});  
   //insert into it
-  res.redirect('read');
+  res.redirect('/');
 
 }); 
 
 app.post('/update/:id', async (req,res)=>{
 
-  console.log("req.parms.id: ", req.params.id)
+  console.log('in /update'); 
+  // console.log("req.parms.id: ", req.params.id);
+  // console.log("req.body ", req.body);
 
   client.connect; 
   const collection = client.db("jacob-db").collection("whatever-collection");
   let result = await collection.findOneAndUpdate( 
-  {"_id": new ObjectId(req.params.id)}, { $set: {"post": "NEW POST" } }
+  {"_id": new ObjectId(req.params.id)}, { $set: {"fname": req.body.fname } }
 )
 .then(result => {
-  console.log(result); 
-  res.redirect('/read');
+  console.log("result", result); 
+  res.redirect('/');
 })
 }); 
 
@@ -102,7 +103,7 @@ app.post('/delete/:id', async (req,res)=>{
 
 .then(result => {
   console.log(result); 
-  res.redirect('/read');
+  res.redirect('/');
 })
 
   //insert into it
