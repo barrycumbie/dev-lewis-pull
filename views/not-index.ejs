@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,13 +31,10 @@
     <div class='row'>
       <div class='col-sm'>
         <!--   second column   -->
-        <form>
-          <form method="POST" action="/update">
+        <form method="POST" action="/update/<%= pData[0]._id%>">
+        <form method="POST" action="/insert">
           <label for='fname'>First Name:</label>
-          <input hidden id = "66feda5e44d5698e4463c8df">
           <input type="text" id= 'fname' name='fname'>
-          <button id="fnameBtn" type="button" class="btn btn-info">Update</button>
-          </form>
           <br>
           <br>
           <label for='lname'>Last Name:</label>
@@ -47,6 +44,7 @@
           <label for='email'>Email Address:</label>
           <input type='text' id='email' name='email'>
           <br>
+          <button type="submit">insert</button>
           <br>
           <label for='street'>Patient's Street Address:</label>
           <input type='text' id='street' name='street'>
@@ -116,7 +114,21 @@
           <input type='text' id='zip' name='zip'>
           <br>
           <br>
-          <p>Requestor's Relationship:<br>
+          <label for='physican'>Preferred Physican (if known):</label>
+          <input type='text' id='physican' name='physican'>
+          <br>
+          <br>
+          <label for='insurance'>Patient's Insurance Carrier:</label>
+          <input type='text' id='insurance' name='insurance'>
+          <br>
+          <br>
+          <label for='phone'>Phone:</label>
+          <input type='text' id='phone' name='phone'>
+          <br>
+          <br>
+        </form>
+        </form>
+          <!-- <p>Requestor's Relationship:<br>
             <input type="radio"
                    class="form-check-input" 
                    id="self" 
@@ -150,10 +162,10 @@
               <input type="text" id="homeAddy" name="homeAddy">
             </div>
           <br>
-      </div>
+      </div> -->
       <!--    second column    -->
       <div class='col-4'>
-        <label for='physican'>Preferred Physican (if known):</label>
+        <!-- <label for='physican'>Preferred Physican (if known):</label>
         <input type='text' id='physican' name='physican'>
         <br>
         <br>
@@ -164,8 +176,8 @@
         <label for='phone'>Phone:</label>
         <input type='text' id='phone' name='phone'>
         <br>
-        <br>
-        <p>Best Time to Call:<br>
+        <br> -->
+        <!-- <p>Best Time to Call:<br>
           <input type="radio"
                  class="form-check-input" 
                  id="morning" 
@@ -232,10 +244,10 @@
                  value="nopref">
           <label for="nopref">No Preference</label>
           <br>
-      </div>
+      </div> -->
       <!--     third column     -->
       <div class='col-sm'>
-        <p>Which Procedure are you making an appointment for?<br>
+        <!-- <p>Which Procedure are you making an appointment for?<br>
           
           <input type="checkbox" id="cbox1" name="cbox1" value="examinatiom">
           <label for="cbox1">Medical Examination</label><br>
@@ -253,7 +265,7 @@
           <br>
           <label for='datetimeBox'>Requested Appointment Date:</label>
           <input type='datetime-local' id='datetimeBox' name='datetimeBox'>
-          <br>
+          <br> -->
           <!--    buttons    -->
           <br>
           <br>
@@ -271,9 +283,41 @@
         </div>
       </div>
     </div>
-    </form>
   </div>
 </div>
+<div>
+  <!-- <h4>past patient registration</h4>
+
+  <% pData.forEach((value, index)=> { %> 
+
+   <p>index = <%=index%>, value = <%=value%> </p>
+    , _id = <%= pData[index]._id %> 
+
+     
+<%
+
+ })  %> -->
+    <% pData.forEach((value)=> { %>
+
+    <p>First Name: <%= value.fname %></p>
+    <p>Last Name: <%= value.lname %></p>
+    <p>Email: <%= value.email %></p>
+    <p>Street: <%= value.street %></p>
+    <p>City: <%= value.city %></p>
+    <p>State: <%= value.state %></p>
+    <p>Zip: <%= value.zip %></p>
+    <p>Physican: <%= value.physican %></p>
+    <p>Insurance: <%= value.insurance %></p>
+    <p>Phone: <%= value.phone %></p>
+    <button id="updateBtn" type="submit" class="btn btn-info">Update</button>
+    <button id="deleteBtn" type="submit" class="btn btn-danger">Delete</button>
+
+
+    <% }) %>
+
+ 
+</div>
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js'></script>
@@ -283,14 +327,14 @@
 
 <script >function loadData() {
   document.getElementById('fname').value = '<%= pData[0].fname %>'
-  document.getElementById('lname').value = '<%= pData[0].lname %>'
-  document.getElementById('email').value = '<%= pData[0].email %>'
-  document.getElementById('street').value = '<%= pData[0].street %>'
-  document.getElementById('city').value = '<%= pData[0].city %>'
-  document.getElementById('state').value = '<%= pData[0].state %>'
-  document.getElementById('zip').value = '<%= pData[0].zip %>'
-  document.getElementById('physican').value = '<%= pData[0].physican %>'
-  document.getElementById('insurance').value = '<%= pData[0].insurance %>'
-  document.getElementById('phone').value = '<%= pData[0].phone %>'
+  document.getElementById('lname').value = '<%= pData[1].lname %>'
+  document.getElementById('email').value = '<%= pData[2].email %>'
+  document.getElementById('street').value = '<%= pData[3].street %>'
+  document.getElementById('city').value = '<%= pData[4].city %>'
+  document.getElementById('state').value = '<%= pData[5].state %>'
+  document.getElementById('zip').value = '<%= pData[6].zip %>'
+  document.getElementById('physican').value = '<%= pData[7].physican %>'
+  document.getElementById('insurance').value = '<%= pData[8].insurance %>'
+  document.getElementById('phone').value = '<%= pData[9].phone %>'
 };</script>
 </html>
