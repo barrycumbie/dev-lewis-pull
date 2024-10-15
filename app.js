@@ -25,21 +25,11 @@ const client = new MongoClient(uri, {
   }
 });
 
-// function whateverNameOfIt (params) {}
-// ()=>{}
-
-// app.get('/', function (req, res) {
-//   // res.send('Hello Node from Ex on local dev box')
-//   res.render('not-index');
-// })
-
 app.get('/ejs', (req,res)=>{
 
   res.render('index', {
     myServerVariable : "something from server"
-  });
-
-  //can you get content from client...to console? 
+  }); 
 })
 
 app.get('/', async (req,res)=>{
@@ -68,9 +58,10 @@ app.post('/insert', async (req,res)=> {
   //connect to db,
   await client.connect();
   //point to the collection 
-  await client.db("jacob-db").collection("whatever-collection").insertOne({ lname: req.body.lname, email: req.body.email});
-  // await client.db("jacob-db").collection("whatever-collection").insertOne({ key: 'hardcoded new key '});  
-  //insert into it
+  await client.db("jacob-db").collection("whatever-collection").insertOne({ fname: req.body.fname, lname: req.body.lname, email: req.body.email, 
+                                                                          street: req.body.street, city: req.body.city, state: req.body.state,
+                                                                          zip: req.body.zip, physian: req.body.physian, insurance: req.body.insurance,
+                                                                          phone: req.body.phone})
   res.redirect('/');
 
 }); 
@@ -84,7 +75,9 @@ app.post('/update/:id', async (req,res)=>{
   client.connect; 
   const collection = client.db("jacob-db").collection("whatever-collection");
   let result = await collection.findOneAndUpdate( 
-  {"_id": new ObjectId(req.params.id)}, { $set: {"fname": req.body.fname } }
+  {"_id": new ObjectId(req.params.id)}, { $set: {"fname": req.body.fname, "lname": req.body.lname, "email": req.body.email, "street": req.body.street,
+                                                "city": req.body.city, "state": req.body.state, "zip": req.body.zip, "physican": req.body.physican
+                                                "insurance": req.body.insurance, "phone": req.body.phone} }
 )
 .then(result => {
   console.log("result", result); 
@@ -99,14 +92,14 @@ app.post('/delete/:id', async (req,res)=>{
   client.connect; 
   const collection = client.db("jacob-db").collection("whatever-collection");
   let result = await collection.findOneAndDelete( 
-  {"_id": new ObjectId(req.params.id)})
-
+  {"_id": new ObjectId(req.params.id)}, , { $set: {"fname": req.body.fname, "lname": req.body.lname, "email": req.body.email, "street": req.body.street,
+                                                "city": req.body.city, "state": req.body.state, "zip": req.body.zip, "physican": req.body.physican
+                                                "insurance": req.body.insurance, "phone": req.body.phone} }
+  )
 .then(result => {
   console.log(result); 
   res.redirect('/');
 })
-
-  //insert into it
 
 })
 
