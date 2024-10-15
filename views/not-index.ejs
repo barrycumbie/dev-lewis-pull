@@ -32,6 +32,7 @@
       <div class='col-sm'>
         <!--   second column   -->
         <form method="POST" action="/update/<%= pData[0]._id%>">
+        <form method="POST" action="/delete/<%= pData[0]._id%>">
         <form method="POST" action="/insert">
           <label for='fname'>First Name:</label>
           <input type="text" id= 'fname' name='fname'>
@@ -126,6 +127,7 @@
           <input type='text' id='phone' name='phone'>
           <br>
           <br>
+        </fprm>
         </form>
         </form>
           <!-- <p>Requestor's Relationship:<br>
